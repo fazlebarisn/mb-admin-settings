@@ -29,9 +29,7 @@ function mb_admin_submenu_page() {
 
 }
 add_action('admin_menu', 'mb_admin_submenu_page', 999);
-function render_user_edit_page_test(){
-    echo 'hello';
-}
+
 // Callback function for submenu page
 function mb_admin_submenu_page_callback() {
     ?>
@@ -80,7 +78,6 @@ function mb_email_body_field_callback() {
     $value = get_option('mb_email_body_field');
     // echo '<textarea name="mb_email_body_field" cols="60" rows="10">' . esc_textarea($value) . '</textarea>';
     $editor_id = 'mb_admin_settings_editor';
-    
     wp_editor($value, $editor_id, array('textarea_name' => 'mb_email_body_field'));
 }
 
