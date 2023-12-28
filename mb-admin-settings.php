@@ -15,7 +15,10 @@ defined('ABSPATH') or die('Nice Try!');
 
 // theme-general-settings
 // edit.php?post_type=product
-// Add submenu 
+
+/**
+ * add submenu
+ */
 function mb_admin_submenu_page() {
 
     add_submenu_page(
@@ -57,6 +60,14 @@ function mb_admin_settings() {
     );
 
     add_settings_field(
+        'mb_template_field',
+        'Template Type',
+        'mb_template_field_callback',
+        'mb_email_section',
+        'mb_admin_settings_section'
+    );
+
+    add_settings_field(
         'mb_email_body_field',
         'Email Body',
         'mb_email_body_field_callback',
@@ -70,13 +81,26 @@ add_action('admin_init', 'mb_admin_settings');
 
 // Section callback function
 function mb_admin_settings_section_callback() {
-    echo 'All email settings';
+    echo "Welcome to our Email Template Management section! This feature empowers you to streamline your communication by providing a centralized hub for creating, managing, and registering email templates. Whether you're crafting personalized messages or ensuring brand consistency, this section has you covered.";
+}
+
+// Template callback function
+function mb_template_field_callback() {
+    ?>
+        <div style="margin-bottom: 10px;">
+            <a href="#" target="_blank">
+                <button class="button" type="button">Template</button>
+            </a>
+            <a href="#" target="_blank">
+                <button class="button" type="button">Approved Template</button>
+            </a>
+        </div>
+    <?php
 }
 
 // Textarea field callback function
 function mb_email_body_field_callback() {
     $value = get_option('mb_email_body_field');
-    // echo '<textarea name="mb_email_body_field" cols="60" rows="10">' . esc_textarea($value) . '</textarea>';
     $editor_id = 'mb_admin_settings_editor';
     wp_editor($value, $editor_id, array('textarea_name' => 'mb_email_body_field'));
 }
